@@ -33,6 +33,10 @@ public class UsuarioService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		/*
 		 Responsible for managing logged in users. implements UserDetailsService
+		 
+		 It is through this method that spring will also know which user profiles are 
+		 accessing the application, because in the Usuario class there is a list of each 
+		 user's profile, thus having access to the object.
 		*/
 		Usuario usuario = buscarPorEmail(username);
 		return new User(
