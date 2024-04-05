@@ -94,7 +94,7 @@
 	<script th:inline="javascript" th:fragment="inlinescript">
 		/* 'inline' script to retrieve user profiles and display them in a selected way */
 		$('#perfis').ready(function(){
-			var perfis = [[$(usuario.perfis)]]
+			var perfis = [[${usuario.perfis}]]
 			$.each(perfis, function(k, v) {
 				$('#perfis option[value="'+ v.id +'"]').attr('selected', 'selected');
 			})
