@@ -1,5 +1,7 @@
 package com.mballem.curso.security.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +39,12 @@ public class MedicoService {
 		if (!medico.getEspecialidades().isEmpty()) {
 			m2.getEspecialidades().addAll(medico.getEspecialidades());
 		}
+	}
+
+	@Transactional(readOnly = true)
+	public Medico buscarPorEmail(String email) {
+		
+		return repository.findByUsuarioEmail(email).orElse(new Medico());
 	}
 
 }
