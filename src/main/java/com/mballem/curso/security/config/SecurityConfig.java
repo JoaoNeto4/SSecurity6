@@ -2,6 +2,7 @@ package com.mballem.curso.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.mballem.curso.security.domain.PerfilTipo;
 import com.mballem.curso.security.service.UsuarioService;
 
+@EnableGlobalMethodSecurity(prePostEnabled = true)//habilit anotation security
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
@@ -33,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			
 			
 			// private access medic
-			.antMatchers("/medicos/especialidade/titulo/*").hasAnyAuthority(PACIENTE)
+			.antMatchers("/medicos/especialidade/titulo/*").hasAnyAuthority(PACIENTE, MEDICO)
 			.antMatchers("/medicos/dados**", "/medicos/salvar**", "/medicos/editar**").hasAnyAuthority(MEDICO, ADMIN)
 			.antMatchers("/medicos/**").hasAnyAuthority(MEDICO)
 			

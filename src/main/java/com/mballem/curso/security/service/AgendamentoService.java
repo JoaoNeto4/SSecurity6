@@ -15,6 +15,7 @@ import com.mballem.curso.security.datatables.Datatables;
 import com.mballem.curso.security.datatables.DatatablesColunas;
 import com.mballem.curso.security.domain.Agendamento;
 import com.mballem.curso.security.domain.Horario;
+import com.mballem.curso.security.exception.AcessoNegadoException;
 import com.mballem.curso.security.repository.AgendamentoRepository;
 import com.mballem.curso.security.repository.projection.HistoricoPaciente;
 
@@ -53,6 +54,34 @@ public class AgendamentoService {
 		datatables.setColunas(DatatablesColunas.AGENDAMENTOS);
 		Page<HistoricoPaciente> page = repository.findHistoricoByMedicoEmail(email, datatables.getPageable());
 		return datatables.getResponse(page);
+	}
+
+	@Transactional(readOnly = true)
+	public Agendamento buscarPorId(Long id) {
+		return repository.findById(id).get();
+	}
+
+	@Transactional(readOnly = false)
+	public void editar(Agendamento agendamento, String email) {
+		Agendamento ag = buscarPorIdEUsuario(agendamento.getId(), email);
+		ag.setDataConsulta(agendamento.getDataConsulta());
+		ag.setEspecialidade(agendamento.getEspecialidade());
+		ag.setHorario(agendamento.getHorario());
+		ag.setMedico(agendamento.getMedico());
+		
+	}
+
+	@Transactional(readOnly = true)
+	public Agendamento buscarPorIdEUsuario(Long id, String email) {
+		
+		return repository.findAllByIdAndPacienteOrMedicoEmail(id, email)
+				.orElseThrow(() -> new AcessoNegadoException("Acesso nego ao usuario : "+ email));
+	}
+
+	@Transactional(readOnly = false)
+	public void remover(Long id) {
+		repository.deleteById(id);
+		
 	}
 
 }

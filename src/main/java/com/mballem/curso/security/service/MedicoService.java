@@ -59,4 +59,10 @@ public class MedicoService {
 		return repository.findByMedicosPorEspsecialidade(titulo);
 	}
 
+	@Transactional(readOnly = true)
+	public boolean existeEspecialidadeAgendada(Long idMed, Long idEsp) {
+
+		return repository.hasEspecialidadeAgendada(idMed, idEsp).isPresent();
+	}
+
 }
