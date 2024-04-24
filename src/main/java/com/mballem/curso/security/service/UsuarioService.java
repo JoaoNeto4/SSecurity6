@@ -2,6 +2,7 @@ package com.mballem.curso.security.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mballem.curso.security.datatables.Datatables;
 import com.mballem.curso.security.datatables.DatatablesColunas;
 import com.mballem.curso.security.domain.Perfil;
+import com.mballem.curso.security.domain.PerfilTipo;
 import com.mballem.curso.security.domain.Usuario;
 import com.mballem.curso.security.repository.UsuarioRepository;
 
@@ -48,7 +50,8 @@ public class UsuarioService implements UserDetailsService{
 		 accessing the application, because in the Usuario class there is a list of each 
 		 user's profile, thus having access to the object.
 		*/
-		Usuario usuario = buscarPorEmail(username);
+		Usuario usuario = buscarPorEmailEAtivo(username)
+				.orElseThrow(() -> new UsernameNotFoundException("Usuario " + username + " não encontrado."));
 		return new User(
 				usuario.getEmail(),
 				usuario.getSenha(),
@@ -107,5 +110,20 @@ public class UsuarioService implements UserDetailsService{
 		usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
 		repository.save(usuario);
 		
+	}
+
+	@Transactional(readOnly = false)
+	public void salvarCadastroPaciente(Usuario usuario) {
+		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
+		usuario.setSenha(crypt);
+		usuario.addPerfil(PerfilTipo.PACIENTE);
+		repository.save(usuario);
+		
+	}
+	
+	@Transactional(readOnly = true)
+	public Optional<Usuario> buscarPorEmailEAtivo(String email){
+		
+		return repository.findByEmailAndAtivo(email);
 	}
 }

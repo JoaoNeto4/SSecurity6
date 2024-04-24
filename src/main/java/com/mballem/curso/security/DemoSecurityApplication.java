@@ -1,12 +1,16 @@
 package com.mballem.curso.security;
 
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.mail.SimpleMailMessage;
+//import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class DemoSecurityApplication {
-
+	
 	public static void main(String[] args) {
 		/*
 		 class used to generate an encrypted password for implementation testing purposes only
@@ -19,4 +23,24 @@ public class DemoSecurityApplication {
 
 		SpringApplication.run(DemoSecurityApplication.class, args);
 	}
+	
+	
+	/*
+	 *teste de email,  nessessario implements CommandLineRunner
+	 * 
+	 */
+	/*
+	@Autowired
+	JavaMailSender sender;
+	
+	@Override
+	public void run(String... args) throws Exception {
+		SimpleMailMessage simple = new SimpleMailMessage();
+		simple.setTo("testeemailjoaomelena4@gmail.com");
+		simple.setText("teste n1");
+		simple.setSubject("teste 1");
+		sender.send(simple);
+		
+	}
+	*/
 }

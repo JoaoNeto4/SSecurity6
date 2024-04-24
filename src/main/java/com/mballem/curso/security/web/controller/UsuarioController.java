@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -133,7 +134,7 @@ public class UsuarioController {
 	}
 	
 	
-	@GetMapping("editar/senha")
+	@GetMapping("/editar/senha")
 	public String abrirEditarSenha() {
 		return "usuario/editar-senha";
 	}
@@ -157,6 +158,30 @@ public class UsuarioController {
 		service.alterarSenha(u, s1);
 		attr.addFlashAttribute("sucesso", "Senhas alterada com sucesso.");
 		return "redirect:/u/editar/senha";
+	}
+	
+	@GetMapping("/novo/cadastro")
+	public String novoCadastro(Usuario usuario) {
+		
+		return "cadastrar-se";
+	}
+	
+	@GetMapping("/cadastro/realizado")
+	public String cadastroRealizado() {
+		
+		return "fragments/mensagem";
+	}
+	
+	@PostMapping("/cadastro/paciente/salvar")
+	public String salvarCadastroPaciente(Usuario usuario, BindingResult result) {
+		try {
+			service.salvarCadastroPaciente(usuario);
+		} catch (DataIntegrityViolationException ex) {
+			result.reject("email", "ops... Este email já existe na base de dados.");
+			return "cadastrar-se";
+		}
+		
+		return "redirect:/u/cadastro/realizado";
 	}
 		
 }
