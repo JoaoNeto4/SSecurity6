@@ -29,18 +29,22 @@ public class DemoSecurityApplication {
 	 *teste de email,  nessessario implements CommandLineRunner
 	 * 
 	 */
-	/*
+	/* 
 	@Autowired
 	JavaMailSender sender;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		SimpleMailMessage simple = new SimpleMailMessage();
-		simple.setTo("testeemailjoaomelena4@gmail.com");
+		simple.setTo("email@email.com");
 		simple.setText("teste n1");
 		simple.setSubject("teste 1");
+		simple.setFrom("email@email.com"); // <--- THIS IS IMPORTANT
+		simple.setSubject("email@email.com");
 		sender.send(simple);
+		System.out.println("email enviado!!!!!!!!!");
 		
 	}
 	*/
+	
 }
