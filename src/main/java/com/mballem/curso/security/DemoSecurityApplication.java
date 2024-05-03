@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+//import com.mballem.curso.security.service.EmailService;
+
 @SpringBootApplication
 public class DemoSecurityApplication {
 	
@@ -29,22 +31,20 @@ public class DemoSecurityApplication {
 	 *teste de email,  nessessario implements CommandLineRunner
 	 * 
 	 */
-	/* 
+	/*
 	@Autowired
 	JavaMailSender sender;
 	
+	@Autowired
+	EmailService service;
+	
 	@Override
 	public void run(String... args) throws Exception {
-		SimpleMailMessage simple = new SimpleMailMessage();
-		simple.setTo("email@email.com");
-		simple.setText("teste n1");
-		simple.setSubject("teste 1");
-		simple.setFrom("email@email.com"); // <--- THIS IS IMPORTANT
-		simple.setSubject("email@email.com");
-		sender.send(simple);
-		System.out.println("email enviado!!!!!!!!!");
+		// apenas para finalidade de testes
+		service.enviarPedidoDeConfirmacaoDeCadastro("jneto_1011@outlook.com", "cod4551");
 		
 	}
 	*/
+	
 	
 }
