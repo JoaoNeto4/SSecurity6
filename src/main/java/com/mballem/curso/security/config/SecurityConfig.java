@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/", "/home").permitAll()
 			.antMatchers("/u/novo/cadastro", "/u/cadastro/realizado", "/u/cadastro/paciente/salvar").permitAll()
 			.antMatchers("/u/confirmacao/cadastro").permitAll()
+			.antMatchers("/u/p/**").permitAll()
 			
 			// private access admin
 			.antMatchers("/u/editar/senha", "/u/confirmar/senha").hasAnyAuthority(MEDICO, PACIENTE)
@@ -62,7 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.logoutSuccessUrl("/")
 			.and()
 				.exceptionHandling()
-				.accessDeniedPage("/acesso-negado");
+				.accessDeniedPage("/acesso-negado")
+			.and()
+				.rememberMe();/* remember-me for login page*/
 	}
 
 	@Override

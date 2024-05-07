@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -195,6 +196,43 @@ public class UsuarioController {
 		attr.addFlashAttribute("subtexto", "Siga com seu login/senha");
 		
 		return "redirect:/login";
+	}
+	
+	@GetMapping("/p/redefinir/senha")
+	public String pedidoRedefinirSenha(@RequestParam("codigo") String codigo, RedirectAttributes attr) {
+		
+		service.ativarCadastroPaciente(codigo);
+		attr.addFlashAttribute("alerta", "sucesso");
+		attr.addFlashAttribute("titulo", "Cadastro Ativado.");
+		attr.addFlashAttribute("texto", "Parebéns, seu cadastro está ativo.");
+		attr.addFlashAttribute("subtexto", "Siga com seu login/senha");
+		
+		return "usuario/pedido-recuperar-senha";
+	}
+	
+	@GetMapping("/p/recuperar/senha")
+	public String redefinirSenha(String email, ModelMap model) throws MessagingException{
+		service.pedidoRedefinicaoDeSenha(email);
+		model.addAttribute("sucesso", "Em instantes você receberá um email para redefinição de senha.");
+		model.addAttribute("usuario", new Usuario(email));
+				
+		return "usuario/recuperar-senha";
+	}
+	
+	@PostMapping("/p/nova/senha")
+	public String confirmacaoDeRedefincaoDeSenha(Usuario usuario, ModelMap model) throws MessagingException{
+		Usuario u = service.buscarPorEmail(usuario.getEmail());
+		if (!usuario.getCodigoVerificador().equals(u.getCodigoVerificador())) {
+			model.addAttribute("falha", "Código verificador não confere.");
+			return "usuario/recuperar-senha";
+		}
+		u.setCodigoVerificador(null);
+		service.alterarSenha(u, usuario.getSenha());
+		
+		model.addAttribute("alerta", "sucesso");
+		model.addAttribute("titulo", "Senha redefinida.");
+		model.addAttribute("texto", "Você já pode logar no sistema");
+		return "login";
 	}
 		
 }
