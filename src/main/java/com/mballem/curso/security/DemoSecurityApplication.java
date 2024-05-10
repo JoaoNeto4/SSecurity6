@@ -1,5 +1,6 @@
 package com.mballem.curso.security;
 
+
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import com.mballem.curso.security.service.EmailService;
 
 @SpringBootApplication
+//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class DemoSecurityApplication {
 	
 	public static void main(String[] args) {
@@ -46,5 +49,18 @@ public class DemoSecurityApplication {
 	}
 	*/
 	
+	
+	/*
+	@Override
+	public void run(String... args) throws Exception {
+
+	}
+
+	@PostConstruct
+	public void init(){
+		// Setting Spring Boot SetTimeZone
+		TimeZone.setDefault(TimeZone.getTimeZone("America/Recife"));
+	}
+	*/
 	
 }

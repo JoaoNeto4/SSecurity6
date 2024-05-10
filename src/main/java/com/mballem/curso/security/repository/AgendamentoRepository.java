@@ -13,6 +13,7 @@ import com.mballem.curso.security.domain.Agendamento;
 import com.mballem.curso.security.domain.Horario;
 import com.mballem.curso.security.repository.projection.HistoricoPaciente;
 
+
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long>{
 	
 	@Query("select h "

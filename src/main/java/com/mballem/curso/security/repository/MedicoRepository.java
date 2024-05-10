@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.mballem.curso.security.domain.Medico;
 
-
 public interface MedicoRepository extends JpaRepository<Medico, Long>{
 	
 	@Query("select m from Medico m where m.usuario.id = :id")

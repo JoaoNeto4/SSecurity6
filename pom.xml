@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.1.5</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mballem.curso.security</groupId>
 	<artifactId>demo-security</artifactId>
@@ -17,7 +18,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
@@ -38,12 +39,17 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.22</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
+
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
@@ -63,45 +69,42 @@
 			<artifactId>jquery</artifactId>
 			<version>3.3.1-2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		
+
 		<!-- We will change when migrating to spring security 6 -->
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-		</dependency>
-		
-		<!-- mail -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-mail</artifactId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
 		</dependency>
 
-		
-		<!-- Flyway 
+		<!-- mail -->
 		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-			<version>8.5.13</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
-		-->
-		<!-- JPA Modelgen
+
+
+		<!-- Flyway <dependency> <groupId>org.flywaydb</groupId> <artifactId>flyway-core</artifactId> 
+			<version>8.5.13</version> </dependency> -->
+		<!-- JPA Modelgen <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-jpamodelgen</artifactId> 
+			<scope>provided</scope> </dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-jpamodelgen</artifactId>
-			<scope>provided</scope>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
-		 -->
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

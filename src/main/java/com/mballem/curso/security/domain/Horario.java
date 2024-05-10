@@ -2,7 +2,7 @@ package com.mballem.curso.security.domain;
 
 import java.time.LocalTime;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @SuppressWarnings("serial")
 @Entity
